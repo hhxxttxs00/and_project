@@ -1,9 +1,12 @@
 package org.techtown.calenderapp;
 
+import static org.techtown.calenderapp.CalendarUnits.daysInMontArray;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -18,14 +21,13 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
-    LocalDate selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initWidgets();
-        selectedDate = LocalDate.now();
+        CalendarUnits.selectedDate = LocalDate.now();
         setMonthView();
     }
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    private ArrayList<String> daysInMontArray(LocalDate date) {
+    public static ArrayList<String> daysInMontArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
         int daysInMonth = yearMonth.lengthOfMonth();
@@ -65,27 +67,31 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         return daysInMonthArray;
     }
 
-    private String monthYearFromDate(LocalDate date){
+    public String monthYearFromDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         //DateTimeFormatter: 날짜 보이는 양식을 아예 정해주는 것
         return date.format(formatter);
     }
 
     public void previousMonthAction(View view) {
-        selectedDate = selectedDate.minusMonths(1);
+        CalendarUnits.selectedDate = CalendarUnits.selectedDate.minusMonths(1);
         setMonthView();
     }
 
     public void nextMonthAction(View view) {
-        selectedDate = selectedDate.plusMonths(1);
+        CalendarUnits.selectedDate = CalendarUnits.selectedDate.plusMonths(1);
         setMonthView();
     }
 
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.equals("")){
-            String message = "Selected Date " + dayText + monthYearFromDate(selectedDate);
+            String message = "Selected Date " + dayText + CalendarUnits.monthYearFromDate(CalendarUnits.selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void weeklyAction(View view) {
+        startActivity(new Intent(this, WeeklyViewActivity.class));
     }
 }
