@@ -10,8 +10,22 @@ public class Event {
     LocalDate date;
     LocalTime time;
 
-    public static ArrayList<Event> eventsList = new ArrayList<>();
+    public Event(String name, LocalDate date, LocalTime time) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+    }
 
+    public static ArrayList<Event> eventsList = new ArrayList<>();
+    public static ArrayList<Event> eventsForDate(LocalDate date) {
+        ArrayList<Event> events = new ArrayList<>();
+
+        for(Event event : eventsList) {
+            if(event.getDate().equals(date))
+                events.add(event);
+        }
+        return events;
+    }
 
     public String getName() {
         return name;
@@ -37,20 +51,8 @@ public class Event {
         this.time = time;
     }
 
-    public Event(String name, LocalDate date, LocalTime time) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-    }
 
-    public static ArrayList<Event> eventsForDate(LocalDate date) {
-        ArrayList<Event> events = new ArrayList<>();
 
-        for(Event event : eventsList) {
-            if(event.getDate().equals(date))
-                events.add(event);
-        }
-        return events;
-    }
+
 
 }
