@@ -2,7 +2,6 @@ package org.techtown.calenderapp;
 
 import static org.techtown.calenderapp.CalendarUnits.daysInWeekArray;
 import static org.techtown.calenderapp.CalendarUnits.monthYearFromDate;
-import static org.techtown.calenderapp.CalendarUnits.selectedDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,12 +12,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class WeeklyViewActivity extends AppCompatActivity {
+public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
@@ -49,7 +47,10 @@ public class WeeklyViewActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+        setEventAdapter();
     }
+
+
 
     public void previousWeekAction(View view) {
     CalendarUnits.selectedDate = CalendarUnits.selectedDate.minusWeeks(1);
@@ -68,7 +69,22 @@ public class WeeklyViewActivity extends AppCompatActivity {
         setWeekView();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setEventAdapter();
+    }
+
+    private void setEventAdapter() {
+        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUnits.selectedDate);
+        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
+        eventListView.setAdapter(eventAdapter);
+    }
+
     public void newEventAction(View view) {
         startActivity(new Intent(this, EventEditActivity.class));
     }
+
+
 }

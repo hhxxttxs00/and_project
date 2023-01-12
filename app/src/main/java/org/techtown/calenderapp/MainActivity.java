@@ -10,10 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -39,32 +37,13 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     }
 
     private void setMonthView() {
-        monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMontArray(selectedDate);
+        monthYearText.setText(monthYearFromDate(CalendarUnits.selectedDate));
+        ArrayList<LocalDate> daysInMonth = daysInMontArray(CalendarUnits.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth,this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
-    }
-
-    public static ArrayList<String> daysInMontArray(LocalDate date) {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue(); //getDayOfWeek: 요일 가져오기
-
-        for(int i = 1; i<=42; i++){
-            if(i <= dayOfWeek || i> daysInMonth + dayOfWeek){
-                daysInMonthArray.add("");
-            }
-            else {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
-            }
-        }
-        return daysInMonthArray;
     }
 
     public String monthYearFromDate(LocalDate date){
@@ -92,6 +71,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     }
 
     public void weeklyAction(View view) {
-        startActivity(new Intent(this, WeeklyViewActivity.class));
+        startActivity(new Intent(this, WeekViewActivity.class));
     }
 }
