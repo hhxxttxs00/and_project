@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class WeeklyViewActivity extends AppCompatActivity {
 
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
+    ListView eventListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class WeeklyViewActivity extends AppCompatActivity {
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerview);
         monthYearText = findViewById(R.id.monthYearTV);
-
+        eventListView = findViewById(R.id.eventListView);
     }
 
     private void setWeekView() {
