@@ -147,5 +147,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"/>
-    
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weekRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
 </LinearLayout>

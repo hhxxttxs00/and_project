@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,27 +20,33 @@ import java.util.ArrayList;
 public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
     TextView monthYearText;
-    RecyclerView calendarRecyclerView;
+    RecyclerView calendarRecyclerView, weekRecyclerview;
     ListView eventListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v("TAG","WeekViewActivity: onCreate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weekly_view);
 
         initWidgets();
         setWeekView();
-
     }
 
 
     private void initWidgets() {
+        Log.v("TAG","WeekViewActivity: initWidgets");
+
         calendarRecyclerView = findViewById(R.id.calendarRecyclerview);
         monthYearText = findViewById(R.id.monthYearTV);
         eventListView = findViewById(R.id.eventListView);
+        weekRecyclerview = findViewById(R.id.weekRecyclerview);
     }
 
     private void setWeekView() {
+        Log.v("TAG","WeekViewActivity: setWeekView");
+
         monthYearText.setText(monthYearFromDate(CalendarUnits.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUnits.selectedDate);
 
@@ -51,9 +58,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     }
 
 
-
     public void previousWeekAction(View view) {
-    CalendarUnits.selectedDate = CalendarUnits.selectedDate.minusWeeks(1);
+        CalendarUnits.selectedDate = CalendarUnits.selectedDate.minusWeeks(1);
         setWeekView();
     }
 
@@ -82,9 +88,11 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         eventListView.setAdapter(eventAdapter);
     }
 
+    private void setEventRecyclerviewAdapter(){
+
+    }
+
     public void newEventAction(View view) {
         startActivity(new Intent(this, EventEditActivity.class));
     }
-
-
 }
