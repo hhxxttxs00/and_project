@@ -1,30 +1,31 @@
 package org.techtown.calenderapp;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class EventRecyclerview {
+public class EventRecyclerviewData {
 
     String event;
     LocalDate date;
     LocalTime time;
 
-    public static ArrayList<EventRecyclerview> eventRecyclerviewList = new ArrayList<>();
-    public static ArrayList<EventRecyclerview> eventsForDate(LocalDate date){
-        ArrayList<EventRecyclerview> events = new ArrayList<>();
-        for(EventRecyclerview eventRecyclerview: eventRecyclerviewList){
-            if(eventRecyclerview.getDate().equals(date));
+    public EventRecyclerviewData(String event) {
+        this.event = event;
+//        this.date = date;
+//        this.time = time;
+    }
+
+    public static ArrayList<EventRecyclerviewData> eventRecyclerviewDataList = new ArrayList<>();
+    public static ArrayList<EventRecyclerviewData> eventsForDate(LocalDate date){
+        ArrayList<EventRecyclerviewData> events = new ArrayList<>();
+        for(EventRecyclerviewData eventRecyclerviewData : eventRecyclerviewDataList){
+            if(eventRecyclerviewData.getDate().equals(date));
         }
         return events;
     }
 
-    public EventRecyclerview(String event, LocalDate date, LocalTime time) {
-        this.event = event;
-        this.date = date;
-        this.time = time;
-    }
+
 
     public String getEvent() {
         return event;

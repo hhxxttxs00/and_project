@@ -18,7 +18,7 @@ public class EventEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v("TAG","EventEditActivity: onCreate");
+        Log.v("TAG","EventEditActivity: "+ new Object(){}.getClass().getEnclosingMethod().getName());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
@@ -29,14 +29,14 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
     private void initWidgets() {
-        Log.v("TAG","EventEditActivity: initWidgets");
+        Log.v("TAG","EventEditActivity: "+ new Object(){}.getClass().getEnclosingMethod().getName());
         eventNameET = findViewById(R.id.eventNameET);
         eventDateTV = findViewById(R.id.eventDateTV);
         eventTimeTV = findViewById(R.id.eventTimeTV);
     }
 
     public void saveEventAction(View view) {
-        Log.v("TAG","EventEditActivity: saveEventAction");
+        Log.v("TAG","EventEditActivity: "+ new Object(){}.getClass().getEnclosingMethod().getName());
 
         String eventName = eventNameET.getText().toString();
         Event newEvent = new Event(eventName, CalendarUnits.selectedDate, time);

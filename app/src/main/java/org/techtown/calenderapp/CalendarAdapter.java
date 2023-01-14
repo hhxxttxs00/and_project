@@ -21,12 +21,12 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener) {
         this.days = days;
         this.onItemListener = onItemListener;
-        Log.v("TAG","CalendarAdapter days: " + days + onItemListener);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         /* onCreateViewHolder:
         ViewHolder를 새로 만들어야 할 때 호출되는 메서드.
         이 메서드를 통해 각 아이템을 위한 XML 레이아웃을 이용한 뷰 객체를 생성하고 뷰 홀더에 담아 리턴.
@@ -42,7 +42,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
          */
         if(days.size()>15) {//monthView
             layoutParams.height = (int) (parent.getHeight()*0.1666666); //달력 날짜 높이설정
-            Log.v("TAG","days.size: " +days.size());
         }
         else {// week view
             layoutParams.height = (int) parent.getHeight();
@@ -53,11 +52,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         /* onBindViewHolder:
         ViewHolder를 데이터와 연결할 때 호출하는 메서드. 이 메서드를 통해 뷰홀더의 레이아웃을 채우게 됨.
          */
         LocalDate date = days.get(position);
-        Log.v("TAG","day: " + date);
         if(date == null){
             holder.dayOfMonth.setText("");
         }
@@ -70,11 +69,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+
         return days.size();
     }
 
     //뷰를 보관하는 홀더 객체.
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         /*
         ViewHolder: 뷰를 보관하고 있는 객체.
         각 뷰 객체를 뷰 홀더에 보관함으로써 findViewById()와 같은 반복적 호출 메서드를 줄여 효과적으로 속도 개선을 할 수 있음.
@@ -88,6 +89,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView, OnItemListener onItemListener, ArrayList<LocalDate> days) {
             super(itemView);
+
             parentView = itemView.findViewById(R.id.parentView);
             dayOfMonth = itemView.findViewById(R.id.cellDayText);
             this.onItemListener = onItemListener;

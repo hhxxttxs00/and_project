@@ -1,6 +1,7 @@
 package org.techtown.calenderapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        Log.v("TAG","EventAdapter: "+ new Object(){}.getClass().getEnclosingMethod().getName());
+
         Event event = getItem(position);
 
         if (convertView == null)

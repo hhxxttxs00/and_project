@@ -15,20 +15,20 @@ public class CalendarUnits {
 
     //작성일자 보여주기
     public static String formattedDate(LocalDate date) {
-        Log.v("TAG","CalendarUnits: formattedDate");
+        Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return date.format(formatter);
     }
 
     //작성일자 보여주기
     public static String formattedTime(LocalTime time) {
-        Log.v("TAG","CalendarUnits: formattedTime");
+        Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         return time.format(formatter);
     }
 
     public static String monthYearFromDate(LocalDate date){
-        Log.v("TAG","CalendarUnits: monthYearFromDate");
+        Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         //DateTimeFormatter: 날짜 보이는 양식을 아예 정해주는 것
         return date.format(formatter);
@@ -36,6 +36,8 @@ public class CalendarUnits {
 
 
     public static ArrayList<LocalDate> daysInMontArray(LocalDate date) {
+        Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
+
         //달력에서 날짜들 보여주기
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
@@ -54,7 +56,9 @@ public class CalendarUnits {
     }
 
      public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
-        //주 별 날짜 보여주기
+         Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
+
+         //주 별 날짜 보여주기
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
         LocalDate endDate = current.plusWeeks(1);
@@ -67,7 +71,7 @@ public class CalendarUnits {
     }
 
     private static LocalDate sundayForDate(LocalDate current) {
-        Log.v("TAG","LocalDate: sundayForDate");
+        Log.v("TAG","CalendarUnits: "+ new Object(){}.getClass().getEnclosingMethod().getName());
 
         LocalDate oneWeekAgo = current.minusWeeks(1);
         while (current.isAfter(oneWeekAgo)){

@@ -148,6 +148,25 @@
         android:layout_height="0dp"
         android:layout_weight="5"/>
 
+    <EditText
+        android:id="@+id/edit_event"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="content"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="saveButton"
+        android:textColor="@color/black"
+        android:background="@null"
+        android:textStyle="bold"
+        android:onClick="addRecyclerview"
+        android:layout_gravity="center"
+        android:textSize="20sp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/weekRecyclerview"
